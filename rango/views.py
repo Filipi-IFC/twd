@@ -48,7 +48,6 @@ def add_page(request, category_name_slug):
         category = None
     form = PageForm()
     if request.method == 'POST':
-        print(" e post  metodo\n")
         form = PageForm(request.POST)
         if form.is_valid():
             if category:
@@ -56,9 +55,9 @@ def add_page(request, category_name_slug):
                 page.category = category
                 page.views = 0
                 page.save()
+                print(" post verdadeiro e deuccerto\n")
                 return show_category(request, category_name_slug)
         else:
             print(form.errors)
-    print("chegou")
     context_dict = {'form':form, 'category': category}
     return render(request, 'rango/add_page.html', context_dict)
